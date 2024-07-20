@@ -1,0 +1,23 @@
+--// Variables //--
+local plr = game.Players.LocalPlayer
+local char = plr.Character
+local humanoid = char:FindFirstChildOfClass("Humanoid")
+local Animator = humanoid:FindFirstChildOfClass("Animator")
+local Animation = script:WaitForChild("YourAnimationName") -- Means That You're Animation Is A Child Of Your Local Script
+local track = Animator:LoadAnimation(Animation)
+local uis = game:GetService("UserInputService")
+
+-- Detects When The Player Holds The LeftShift Key
+uis.InputBegan:Connect(function(input, gameProcessedEvent)
+    if Input.KeyCode == Enum.KeyCode.LeftShift then
+       humanoid.WalkSpeed = 30 -- Edit To Your Desired Speed
+       track:Play()
+    end
+end)
+
+uis.InputEnded:Connect(function(input, gameProcessedEvent)
+    if Input.KeyCode == Enum.KeyCode.LeftShift then
+       humanoid.WalkSpeed = 16 -- The Original Player Walkspeed
+       track:Stop()
+    end
+end)
